@@ -1,0 +1,104 @@
+body{
+    height: 100vh;
+    background:  rgb(65, 93, 216);
+    background: -webkit-linear-gradient(
+        to right,
+        #9da4c2
+        rgb(65, 93, 216)
+    );
+    background: linear-gradient(to right,#9da4c2, rgb(65, 93, 216) );
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.row.rownavbar{
+    width: 100%;
+}
+#clockID {
+    position: relative;
+    top: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    display: none;
+
+}
+.button_stopwatch {
+    margin-bottom: 10px;
+    font-size:14pt;
+    border-radius: 5px;
+    padding: 5px 8px;
+}
+.navbar{
+    border-bottom: 1px dashed black;
+    justify-content:center;
+    width: 100%;
+    position:fixed;
+    top:0cm;
+    z-index: 1000;
+    background-color: rgb(234, 236, 250);
+}
+
+.show_userName{
+    color:#333;
+    align-items: center;
+    position: relative;
+    padding-top: 10px;
+}
+.error{
+    color: red;
+    font-weight: bold;
+    
+}
+.toggleCard{
+    background-color: blue !important;
+    background-image: url("/img/q.jpg");
+    width: 100%;
+    height: 100%;
+}
+
+.toggleCard *{
+    display: none;
+    
+}
+.knownCard{
+    background-color: #C37500 !important;
+  opacity:0.7 !important;
+  filter:alpha(opacity=70) !important; /* For IE8 and earlier */
+  box-shadow: 0 0 0px #000000 !important;
+  cursor:default;
+}
+.knownCard::after{
+    content:"כל הכבוד!" ;
+    font-size: xx-large;
+    font-style: italic;
+    color: rgb(38, 61, 161);
+    align-items: center;
+    align-self:center;
+    cursor:none;
+    margin-top: 30pt;
+
+}
+.knownCard *{
+    display: none;
+}
+.Game{
+    top: 80px;
+    align-self:center;
+    position: relative;
+}
+
+#img{
+    width: 90%;
+    height: 90%;
+    border-radius: 20px;
+}
+.card{
+    width: 150px;
+    height:150px;
+    border-radius: 20px;
+    border: 2px solid goldenrod;
+    margin: 10px;
+}
