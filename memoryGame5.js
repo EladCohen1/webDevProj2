@@ -8,7 +8,8 @@ const state = {
     flippedCards: 0,
     totalFlips: 0,
     totalTime: 0,
-    loop: null
+    loop: null,
+    cardsFlipped: false,
 }
     // all the img in arr
     var CardsArr = [
@@ -44,7 +45,9 @@ const state = {
     //generate all cards (random)
     //show on screen the name of the player
     //toggle all card on the back
-    function start(){         
+    function start(){    
+        state.totalTime = 0;
+        selectors.clock.innerText = `time: ${state.totalTime} sec`
         state.loop = setInterval(() => {
             state.totalTime++
             console.log(state.totalTime);
@@ -59,7 +62,27 @@ const state = {
         const inputUserName = $('.inputUserName').val();
         const howManyCards = $('.howManyCards').val();
         console.log(howManyCards +"howMany");
-       
+        CardsArr = [
+            {src: './img/img20.jpg' ,alt:'20'},
+            {src: './img/img2.jpg' , alt:'2'},
+            {src: './img/img3.jpg' , alt:'3'},
+            {src: './img/img4.jpg' , alt:'4'},
+            {src: './img/img5.jpg' , alt:'5'},
+            {src: './img/img6.jpg' , alt:'6'},
+            {src: './img/img7.jpg' , alt:'7'},
+            {src: './img/img8.jpg' , alt:'8'},
+            {src: './img/img9.jpg' , alt:'9'},
+            {src: './img/img10.jpg' , alt:'10'},   
+            {src: './img/img11.jpg' , alt:'11'},
+            {src: './img/img12.jpg' , alt:'12'},
+            {src: './img/img13.jpg' , alt:'13'},
+            {src: './img/img14.jpg' , alt:'14'},
+            {src: './img/img15.jpg' , alt:'15'},
+            {src: './img/img16.jpg' , alt:'16'},
+            {src: './img/img17.jpg' , alt:'17'},
+            {src: './img/img18.jpg' , alt:'18'},
+            {src: './img/img19.jpg' , alt:'19'},
+            {src: './img/img1.jpg' , alt:'1'} ]
         if (howManyCards<=20)
         {
             cardsData.length=howManyCards;
@@ -91,8 +114,9 @@ const state = {
         let element2 = document.getElementById("btnLogin")
         element2.style.display = "none"
 
+        debugger;
         //this row toggle the cards
-        toggle('.card');
+        toggle('.gameCard>div');
         
         //call to func that run the game
         clickCards(howManyCards);
@@ -106,18 +130,20 @@ const state = {
     {
         arr.sort(() => Math.random() - 0.5);
         for (let index = 0; index < howManyCards; index++) {
+            debugger;
             var card = $('.card-col').html();
             var card2 = $('.card-col').prop('outerHTML');
             var card3 = $(card2).removeClass('d-none');
             $("img", card3).attr('src',arr[index].src);
             $("img", card3).attr('alt', arr[index].alt);
+            card3.addClass("gameCard");
             $('.all_cards').append(card3);
 
         }
     }
 
     $('#startGame').click(() => {
-        var x = start();
+        start();
 
     });
     //     function validateBeforeSubmit(event) {
@@ -152,7 +178,7 @@ const state = {
         var cat2=-2;
         
             $('.card').click(function (e) {
-                if (count < 2 && howManyCardsLeft>0 && $(this).hasClass('toggleCard'))
+                if (count < 2 && howManyCardsLeft>0 && $(this).hasClass('toggleCard') && !state.cardsFlipped)
                 {
                     toggle(this);
                     state.flippedCards++
@@ -170,21 +196,39 @@ const state = {
                      count++;
                      //if the cards identical remove from them the option toggle
                      //insert them clss 'knownCard'
-                    if (count==2 && cat1==cat2)
+                    if (count==2)
                     {
-
-                        $(card1).addClass('knownCard');
-                        $(card2).addClass('knownCard');
-
-                        $(card1).removeClass('toggleCard');
-                        $(card2).removeClass('toggleCard');
-                        howManyCardsLeft--;
-                        console.log(howManyCardsLeft +"howMany");
-                        count =0;
-                        card1=null;
-                        card2=null
-                        cat1=-1;
-                        cat2=-2;
+                        if(cat1==cat2){
+                            $(card1).addClass('knownCard');
+                            $(card2).addClass('knownCard');
+    
+                            $(card1).removeClass('toggleCard');
+                            $(card2).removeClass('toggleCard');
+                            howManyCardsLeft--;
+                            console.log(howManyCardsLeft +"howMany");
+                            count =0;
+                            card1=null;
+                            card2=null
+                            cat1=-1;
+                            cat2=-2;
+                            if(howManyCardsLeft<=0){
+                                WinGame();
+                            }
+                        }
+                        else{
+                            state.cardsFlipped = true;
+                            setTimeout(() => {
+                                count=0;
+                                console.log(card1, card2);
+                                toggle(card1);
+                                toggle(card2);
+                                cat1=-1;
+                                cat2=-2;
+                                card1=null;
+                                card2=null;
+                                state.cardsFlipped = false;
+                            }, 1000);
+                        }
                     }                    
                 }
                 //if the game is finished
@@ -196,16 +240,6 @@ const state = {
 
                     return;
                 }
-                else{
-                    count=0;
-                    console.log(card1, card2);
-                    toggle(card1);
-                    toggle(card2);
-                    cat1=-1;
-                    cat2=-2;
-                    card1=null;
-                    card2=null
-                }
             });
         if (howManyCardsLeft==0)
         {
@@ -215,18 +249,16 @@ const state = {
 
         //func that clean the game, and show the results
         function WinGame(){
-
             setTimeout(() => {
-                var div = document.getElementsByClassName('.card');
+                var div = $('.gameCard');
 
-                while (div) {
-                    div.parentNode.removeChild(div);
-                    div = document.getElementsByClassName('.card');
+                for (let index = 0; index < div.length; index++) {
+                    div[index].remove();
                 }
+                clearInterval(state.loop);
                 $('.card-col').addClass('d-none');
-                
-                
-                clearInterval(state.loop)
+                let element2 = document.getElementById("btnLogin");
+                element2.style.display = "block";
             }, 1000)
 
     }

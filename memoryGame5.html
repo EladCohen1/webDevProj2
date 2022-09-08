@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="memoryGame5.css">
 </head>
 
-<body id ="body">
+<body id="body">
     <!-- the head line -->
     <nav class="navbar">
         <div class="container text-center">
@@ -30,21 +30,21 @@
                 <div class="col-8 pt-1">
                     <h1>משחק הזיכרון</h1>
                 </div>
-                <div class = "col-2"></div>
+                <div class="col-2"></div>
             </div>
-            <div class = "row g-4 rownavbar row2">
-                <div class = "col-2"></div>
+            <div class="row g-4 rownavbar row2">
+                <div class="col-2"></div>
                 <div class="col-4">
-                    <output class ="show_userName"></output>
+                    <output class="show_userName"></output>
                 </div>
                 <div class="col-4">
-                    <div class="clock" id = "clockID">
+                    <div class="clock" id="clockID">
                         <div class="button_stopwatch"></div>
                     </div>
                 </div>
-                <div class = "col-2"></div>
+                <div class="col-2"></div>
             </div>
-            </div>
+        </div>
         </div>
     </nav>
 
@@ -54,8 +54,8 @@
             <div class="row  gx-1  all_cards p-1">
                 <div class=" col-xl-2 col-l-2 col-md-3 col-sm-6 d-none card-col">
                     <!-- the cards generate diynamicly -->
-                    <div class="card" id="cardClick">
-                            <img  class="card-img-top" id="imgClick">
+                    <div class="card">
+                        <img class="card-img-top" id="imgClick">
                     </div>
                 </div>
             </div>
@@ -77,14 +77,15 @@
                 <div class="modal-body">
                     <form>
                         <input required id="inpUsername" class="form-control inputUserName" placeholder="שם משתמש">
-                        <input id="countCards" class="form-control howManyCards" placeholder="כמה זוגות קלפים אתה רוצה במשחק?">
+                        <input id="countCards" class="form-control howManyCards"
+                            placeholder="כמה זוגות קלפים אתה רוצה במשחק?">
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <output class="invalidLogin"></output> 
+                    <output class="invalidLogin"></output>
                     <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">סגור</button>
                     <button class="btn btn-success" id="startGame" data-bs-dismiss="modal">התחל משחק!</button>
-                       
+
                 </div>
                 <div class="error">
 
