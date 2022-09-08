@@ -47,6 +47,8 @@ const state = {
     //toggle all card on the back
     function start(){    
         state.totalTime = 0;
+        state.totalFlips = 0;
+        state.flippedCards = 0;
         selectors.clock.innerText = `time: ${state.totalTime} sec`
         state.loop = setInterval(() => {
             state.totalTime++
@@ -143,8 +145,27 @@ const state = {
     }
 
     $('#startGame').click(() => {
-        start();
-
+        const inputUserNam = $('.inputUserName').val();
+        const howManyCards = $('.howManyCards').val();
+        if(isNaN(howManyCards)){
+            $('.error').html("בבקשה הכנס מספר זוגות רצוי ללא אותיות או סימנים מיוחדים");
+        }
+        else if(howManyCards > 20){
+            $('.error').html("מספר הזוגות לא יעלה על 20");
+        }
+        else if(howManyCards <= 0){
+            $('.error').html("מספר הזוגות חייב להיות גדול מ - 0");
+        }
+        else if(inputUserNam.length <= 0){
+            $('.error').html("בבקשה הקלד את שמך");
+        }
+        else if(stringContainsNumber(inputUserNam)){
+            $('.error').html("בבקשה הקלד שם ללא מספרים");
+        }
+        else{
+            start();
+            $('#LoginModel').modal('hide');
+        }
     });
     //     function validateBeforeSubmit(event) {
             
@@ -259,6 +280,19 @@ const state = {
                 $('.card-col').addClass('d-none');
                 let element2 = document.getElementById("btnLogin");
                 element2.style.display = "block";
+                $('#ResultModal').modal('show');
             }, 1000)
 
+            $('.resultFlips').html(`סך הפיכות - ${state.totalFlips}`);
+            $('.resultTime').html(`זמן - ${state.totalTime}`);
     }
+
+    function stringContainsNumber(_input){
+        let string1 = String(_input);
+        for( let i = 0; i < string1.length; i++){
+            if(!isNaN(string1.charAt(i)) && !(string1.charAt(i) === " ") ){
+              return true;
+            }
+        }
+        return false;
+      }

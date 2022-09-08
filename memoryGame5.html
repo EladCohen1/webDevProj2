@@ -70,7 +70,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div>
-                        <h4 class="modal-title" id="exampleModalLabel"> כניסה למשחק</h4>
+                        <h4 class="modal-title" id="exampleModalLabel">כניסה למשחק</h4>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -84,10 +84,37 @@
                 <div class="modal-footer">
                     <output class="invalidLogin"></output>
                     <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">סגור</button>
-                    <button class="btn btn-success" id="startGame" data-bs-dismiss="modal">התחל משחק!</button>
+                    <button class="btn btn-success" id="startGame">התחל משחק!</button>
 
                 </div>
                 <div class="error">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- result model -->
+    <div class="modal fade" id="ResultModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h4 class="modal-title" id="exampleModalLabel">תוצאות המשחק</h4>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body resultModalBody">
+                    <div class="resultTime"></div>
+                    <div class="resultFlips"></div>
+                </div>
+                <div class="modal-footer">
+                    <output class="invalidLogin"></output>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">סגור</button>
+
+                </div>
+                <div class="resultError">
 
                 </div>
             </div>
